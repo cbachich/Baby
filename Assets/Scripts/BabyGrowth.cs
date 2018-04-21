@@ -26,93 +26,93 @@ public class BabyGrowth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.ChangeState(GrowingState.Dormant);
-		this.Reset();
+		ChangeState(GrowingState.Dormant);
+		Reset();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		this.TestInputs();
+		TestInputs();
 
-		if (!this.growing) {
+		if (!growing) {
 			return;
 		}
 
-		this.UpdateTimeDeltas();
+		UpdateTimeDeltas();
 
-		if (this.growthLevel >= this.GrowthGoal) {
-			this.PopoutABaby();
+		if (growthLevel >= GrowthGoal) {
+			PopoutABaby();
 			return;
 		}
 
-		this.UpdateState();
+		UpdateState();
 	}
 
 	private void TestInputs() {
 		if (Input.GetButton("Fire1")) {
-			this.PlantSeed();
+			PlantSeed();
 		}
 
 		if (Input.GetButton("Fire2")) {
-			this.FillWater();
+			FillWater();
 		}
 	}
 
 	public void PlantSeed() {
-		if (this.growing) {
+		if (growing) {
 			return;
 		}
 
-		this.growing = true;
-		this.waterLevel = this.WaterMax;
-		this.ChangeState(GrowingState.GrowingHealthy);
+		growing = true;
+		waterLevel = WaterMax;
+		ChangeState(GrowingState.GrowingHealthy);
 	}
 
 	public void FillWater() {
-		this.waterLevel = this.WaterMax;
+		waterLevel = WaterMax;
 	}
 
 	private void PopoutABaby() {
 		// TODO - Create a baby object
 		GetComponent<SpriteRenderer>().color = Color.yellow;
 
-		//this.ChangeState(State.Dormant);
-		this.Reset();
+		//ChangeState(State.Dormant);
+		Reset();
 	}
 
 	public bool IsGrowing() {
-		return this.growing;
+		return growing;
 	}
 
 	private void UpdateTimeDeltas()
 	{
-		this.waterLevel -= Time.deltaTime;
-		this.growthLevel += Time.deltaTime;
+		waterLevel -= Time.deltaTime;
+		growthLevel += Time.deltaTime;
 	}
 
 	private void UpdateState() {
-		if (this.waterLevel > (this.WaterMax * 0.6)) {
-			this.ChangeState(GrowingState.GrowingHealthy);
+		if (waterLevel > (WaterMax * 0.6)) {
+			ChangeState(GrowingState.GrowingHealthy);
 		}
-		else if (this.waterLevel > (this.WaterMax * 0.25)) {
-			this.ChangeState(GrowingState.GrowingWilting);
+		else if (waterLevel > (WaterMax * 0.25)) {
+			ChangeState(GrowingState.GrowingWilting);
 		}
-		else if (this.waterLevel > 0) {
-			this.ChangeState(GrowingState.GrowingDying);
+		else if (waterLevel > 0) {
+			ChangeState(GrowingState.GrowingDying);
 		}
 		else {
-			this.Kill();
+			Kill();
 		}
 	}
 
 	private void ChangeState(GrowingState state)
 	{
-		this.state = state;
+		state = state;
 
-		switch (this.state)
+		switch (state)
 		{
 			case GrowingState.Dormant:
-				GetComponent<SpriteRenderer>().color = Color.magenta;
+				//GetComponent<SpriteRenderer>().color = Color.magenta;
 				break;
 			case GrowingState.GrowingHealthy:
 				GetComponent<SpriteRenderer>().color = Color.green;
@@ -130,13 +130,13 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void Kill() {
-		this.ChangeState(GrowingState.Dead);
-		this.Reset();
+		ChangeState(GrowingState.Dead);
+		Reset();
 	}
 
 	private void Reset() {
-		this.waterLevel = 0.0f;
-		this.growthLevel = 0.0f;
-		this.growing = false;
+		waterLevel = 0.0f;
+		growthLevel = 0.0f;
+		growing = false;
 	}
 }
