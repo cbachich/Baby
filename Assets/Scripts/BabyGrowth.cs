@@ -107,7 +107,7 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void ChangeState(GrowingState state)
 	{
-		state = state;
+		this.state = state;
 
 		switch (state)
 		{
