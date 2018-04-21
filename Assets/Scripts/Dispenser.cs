@@ -10,9 +10,20 @@ public class Dispenser : MonoBehaviour {
 	[SerializeField]
     private bool isReady = true;
 
+	[SerializeField]
+    private Sprite emptySprite;
+
+	[SerializeField]
+    private Sprite filledSprite;
+
 	private float timeUntilDispense;
+	private SpriteRenderer spriteRenderer;
+
+	public bool ResourceAvailable { get { return isReady; } }
 
 	void Start () {
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
 		if (isReady) {
 			Dispense();
 		 }
@@ -33,6 +44,10 @@ public class Dispenser : MonoBehaviour {
 		}
 	}
 
+	public void TakeResource() {
+		BuildResource();
+	}
+
 	private void CountDownDispenser() {
 		timeUntilDispense -= Time.deltaTime;
 	}
@@ -41,12 +56,13 @@ public class Dispenser : MonoBehaviour {
 	{
 		isReady = false;
 		timeUntilDispense = dispenseRate;
+		spriteRenderer.sprite = emptySprite;
 	}
 
 	private void Dispense()
 	{
 		isReady = true;
 
-		GetComponent<SpriteRenderer>().color = Color.green;
+		spriteRenderer.sprite = filledSprite;
 	}
 }
