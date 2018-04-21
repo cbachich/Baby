@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1696046105}
   - component: {fileID: 1696046104}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd09d417700064233bbe65b05a04b364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
 --- !u!212 &1696046105
 SpriteRenderer:
   m_ObjectHideFlags: 0
