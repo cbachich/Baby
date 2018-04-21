@@ -20,6 +20,10 @@ public class BabyGrowth : MonoBehaviour {
 	private bool growing = false;
 
 	public enum GrowingState { Dormant, GrowingHealthy, GrowingWilting, GrowingDying, Dead };
+
+	public event EventHandler BabyGrowthCompleted;
+	public event EventHandler BabyGrowthDied;
+	
 	private GrowingState state = GrowingState.Dormant;
 
 	public GrowingState CurrentState { get { return state; } }
@@ -74,9 +78,9 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void PopoutABaby() {
 		// TODO - Create a baby object
-		GetComponent<SpriteRenderer>().color = Color.yellow;
+		if(BabyGrowthCompleted != null) { BabyGrowthCompleted(this, EventArgs.Empty); }
 
-		//ChangeState(State.Dormant);
+		ChangeState(GrowingState.Dormant);
 		Reset();
 	}
 
@@ -107,6 +111,8 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void ChangeState(GrowingState state)
 	{
+		if(this.state == state) { return; }
+
 		this.state = state;
 
 		switch (state)
@@ -130,6 +136,7 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void Kill() {
+		if(BabyGrowthDied != null) { BabyGrowthDied(this, EventArgs.Empty); }
 		ChangeState(GrowingState.Dead);
 		Reset();
 	}
