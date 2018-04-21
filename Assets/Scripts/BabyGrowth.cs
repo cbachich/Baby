@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +21,11 @@ public class BabyGrowth : MonoBehaviour {
 	private bool growing = false;
 
 	public enum GrowingState { Dormant, GrowingHealthy, GrowingWilting, GrowingDying, Dead };
-	private GrowingState state = GrowingState.Dormant;
 
+	public event EventHandler BabyGrowthCompleted;
+	public event EventHandler BabyGrowthDied;
+	
+	private GrowingState state = GrowingState.Dormant;
 	public GrowingState CurrentState { get { return state; } }
 
 	// Use this for initialization
@@ -74,9 +78,9 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void PopoutABaby() {
 		// TODO - Create a baby object
-		GetComponent<SpriteRenderer>().color = Color.yellow;
+		if(BabyGrowthCompleted != null) { BabyGrowthCompleted(this, EventArgs.Empty); }
 
-		//this.ChangeState(State.Dormant);
+		ChangeState(GrowingState.Dormant);
 		this.Reset();
 	}
 
@@ -107,6 +111,8 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void ChangeState(GrowingState state)
 	{
+		if(this.state == state) { return; }
+
 		this.state = state;
 
 		switch (this.state)
@@ -130,6 +136,7 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void Kill() {
+		if(BabyGrowthDied != null) { BabyGrowthDied(this, EventArgs.Empty); }
 		this.ChangeState(GrowingState.Dead);
 		this.Reset();
 	}
