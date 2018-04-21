@@ -19,12 +19,14 @@ public class BabyGrowth : MonoBehaviour {
 
 	private bool growing = false;
 
-	enum State { Dormant, GrowingHealthy, GrowingWilting, GrowingDying, Dead };
-	private State state = State.Dormant;
+	public enum GrowingState { Dormant, GrowingHealthy, GrowingWilting, GrowingDying, Dead };
+	private GrowingState state = GrowingState.Dormant;
+
+	public GrowingState CurrentState { get { return state; } }
 
 	// Use this for initialization
 	void Start () {
-		this.ChangeState(State.Dormant);
+		this.ChangeState(GrowingState.Dormant);
 		this.Reset();
 	}
 	
@@ -63,7 +65,7 @@ public class BabyGrowth : MonoBehaviour {
 
 		this.growing = true;
 		this.waterLevel = this.WaterMax;
-		this.ChangeState(State.GrowingHealthy);
+		this.ChangeState(GrowingState.GrowingHealthy);
 	}
 
 	public void FillWater() {
@@ -90,45 +92,45 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void UpdateState() {
 		if (this.waterLevel > (this.WaterMax * 0.6)) {
-			this.ChangeState(State.GrowingHealthy);
+			this.ChangeState(GrowingState.GrowingHealthy);
 		}
 		else if (this.waterLevel > (this.WaterMax * 0.25)) {
-			this.ChangeState(State.GrowingWilting);
+			this.ChangeState(GrowingState.GrowingWilting);
 		}
 		else if (this.waterLevel > 0) {
-			this.ChangeState(State.GrowingDying);
+			this.ChangeState(GrowingState.GrowingDying);
 		}
 		else {
 			this.Kill();
 		}
 	}
 
-	private void ChangeState(State state)
+	private void ChangeState(GrowingState state)
 	{
 		this.state = state;
 
 		switch (this.state)
 		{
-			case State.Dormant:
+			case GrowingState.Dormant:
 				GetComponent<SpriteRenderer>().color = Color.magenta;
 				break;
-			case State.GrowingHealthy:
+			case GrowingState.GrowingHealthy:
 				GetComponent<SpriteRenderer>().color = Color.green;
 				break;
-			case State.GrowingWilting:
+			case GrowingState.GrowingWilting:
 				GetComponent<SpriteRenderer>().color = Color.grey;
 				break;
-			case State.GrowingDying:
+			case GrowingState.GrowingDying:
 				GetComponent<SpriteRenderer>().color = Color.red;
 				break;
-			case State.Dead:
+			case GrowingState.Dead:
 				GetComponent<SpriteRenderer>().color = Color.black;
 				break;
 		}
 	}
 
 	private void Kill() {
-		this.ChangeState(State.Dead);
+		this.ChangeState(GrowingState.Dead);
 		this.Reset();
 	}
 
