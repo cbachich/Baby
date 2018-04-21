@@ -70,7 +70,7 @@ public class BabyGrowth : MonoBehaviour {
 		this.waterLevel = this.WaterMax;
 	}
 
-	public void PopoutABaby() {
+	private void PopoutABaby() {
 		// TODO - Create a baby object
 		GetComponent<SpriteRenderer>().color = Color.yellow;
 
