@@ -31,6 +31,7 @@ public abstract class PlayerInteractable : MonoBehaviour, IPlayerInteractable
 
     public virtual void OnPlayerLeaving(PlayerInteract player)
     {
+        if(PlayerLeft != null) { PlayerLeft(this, new PlayerInteractbleEventArgs()); }
         if(interactIndicator) {
             interactIndicator.enabled = false;
         }
