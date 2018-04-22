@@ -19,6 +19,8 @@ public class PlayerInteract : MonoBehaviour {
 	private Dictionary<GameObject, IPlayerInteractable> gameObjectInteractableLookup = new Dictionary<GameObject, IPlayerInteractable>();
 	private PlayerHoldingState holdingState;
 
+	private BabyMovement heldBaby;
+
 	public PlayerHoldingState HoldingState {
 		get { return holdingState; }
 	}
@@ -32,8 +34,24 @@ public class PlayerInteract : MonoBehaviour {
 		}
 	}
 
+	public bool IsHoldingBaby() {
+		return heldBaby != null;
+	}
+
+	public void PickupBaby(BabyMovement babyMovement) {
+		babyMovement.WasPickedUp();
+		heldBaby = babyMovement;
+	}
+
 	public void DropResource() {
 		holdingState = PlayerHoldingState.Nothing;
+
+		if (heldBaby != null)
+		{
+			heldBaby.transform.position = transform.position;
+			heldBaby.WasDropped();
+			heldBaby = null;
+		}
 	}
 
 	private void Update() {
@@ -54,6 +72,10 @@ public class PlayerInteract : MonoBehaviour {
 
 		if(currentInteractable != null && Input.GetKeyDown(KeyCode.E)) {
 			currentInteractable.OnPlayerInteracting(this);
+		}
+
+		if(Input.GetKeyDown(KeyCode.Q)) {
+			DropResource();
 		}
 	}
 

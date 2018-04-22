@@ -33,7 +33,23 @@ public class BabyMovement : MonoBehaviour {
 	float xDirection;
 	float yDirection;
 
+	public BabyState BabyState { get { return babyState; } }
+
+	public Renderer rend;
+
+	public void WasPickedUp() {
+		babyState = BabyState.Carried;
+	}
+
+	public void WasDropped() {
+		rend.enabled = true;
+		Sit();
+	}
+
 	void Start() {
+		rend = GetComponent<Renderer>();
+        rend.enabled = true;
+		
 		if (babyState == BabyState.Crawling)
 		{
 			StartCrawling();
@@ -50,6 +66,9 @@ public class BabyMovement : MonoBehaviour {
 		}
 		else if (babyState == BabyState.Sitting && WantsToCrawl()) {
 			StartCrawling();
+		}
+		else if (babyState == BabyState.Carried) {
+			rend.enabled = false;
 		}
 	}
 

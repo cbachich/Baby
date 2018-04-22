@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dde2b218809d46238a674e1f51aea78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dispenseRate: 3
+  dispenseRate: 2
   isReady: 1
   emptySprite: {fileID: 21300000, guid: 6e22ad248dd17419fabc97d547ccf838, type: 3}
   filledSprite: {fileID: 21300000, guid: 93bacc450fa8b464baca2f97887a1bb4, type: 3}
