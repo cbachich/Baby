@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 2370309337
     locked: 0
+  - name: Dingo
+    uniqueID: 8417323
+    locked: 0
   - name: Player
     uniqueID: 3097270271
     locked: 0
