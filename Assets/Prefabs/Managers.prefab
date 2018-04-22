@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 0}
+  timeRemaining: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!114 &114802473832777426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,3 +66,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0be7f1fec6e47b5a3fd32930713f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingGameTime: 225
