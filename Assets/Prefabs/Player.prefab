@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4688249788225752}
   - component: {fileID: 114626017655105802}
-  - component: {fileID: 114152085687160362}
+  - component: {fileID: 114706700304853708}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4060345299664084}
   - component: {fileID: 212872090943090178}
+  - component: {fileID: 114628910230646304}
   m_Layer: 0
   m_Name: dude
   m_TagString: Untagged
@@ -71,7 +72,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114152085687160362
+--- !u!114 &114626017655105802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538976997815402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd09d417700064233bbe65b05a04b364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!114 &114628910230646304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954967126279770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93076b6f9957f4988b2e3ebc5e1cb3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atRest: {fileID: 21300000, guid: 30e8351c47b761e499b0aba32bda9655, type: 3}
+  holdingSeed: {fileID: 21300000, guid: 618b4a4c04b7e45239d16f9dc32ffeb4, type: 3}
+  holdingWater: {fileID: 21300000, guid: 1dae61eeed915447188523a0f1dab32f, type: 3}
+  playerInteract: {fileID: 114706700304853708}
+--- !u!114 &114706700304853708
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,18 +113,6 @@ MonoBehaviour:
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &114626017655105802
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1538976997815402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd09d417700064233bbe65b05a04b364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!212 &212872090943090178
 SpriteRenderer:
   m_ObjectHideFlags: 1

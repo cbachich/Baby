@@ -21,10 +21,19 @@ public class PlayerInteract : MonoBehaviour {
 
 	public PlayerHoldingState HoldingState {
 		get { return holdingState; }
-		set {
-			// notify holding state changed
-			holdingState = value;
+	}
+
+	public void PickupResource(ResourceType resourceType) {
+		if (resourceType == ResourceType.Seed) {
+			holdingState = PlayerHoldingState.Seed;
 		}
+		else if (resourceType == ResourceType.Water) {
+			holdingState = PlayerHoldingState.Water;
+		}
+	}
+
+	public void DropResource() {
+		holdingState = PlayerHoldingState.Nothing;
 	}
 
 	private void Update() {

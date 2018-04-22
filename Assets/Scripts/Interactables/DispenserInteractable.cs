@@ -15,6 +15,8 @@ public class DispenserInteractable : PlayerInteractable {
     {
 		if(dispenser.ResourceAvailable) {
 			dispenser.TakeResource();
+
+			player.PickupResource(dispenser.ResourceType);
 		}
     }
 }

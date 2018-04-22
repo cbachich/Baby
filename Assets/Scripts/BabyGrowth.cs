@@ -37,8 +37,6 @@ public class BabyGrowth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		TestInputs();
-
 		if (!growing) {
 			return;
 		}
@@ -51,16 +49,6 @@ public class BabyGrowth : MonoBehaviour {
 		}
 
 		UpdateState();
-	}
-
-	private void TestInputs() {
-		if (Input.GetButton("Fire1")) {
-			PlantSeed();
-		}
-
-		if (Input.GetButton("Fire2")) {
-			FillWater();
-		}
 	}
 
 	public void PlantSeed() {

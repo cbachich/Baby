@@ -15,9 +15,11 @@ public class FarmTileInteractable : PlayerInteractable
     {
 		if(player.HoldingState == PlayerHoldingState.Seed && babyGrowth.CurrentState == BabyGrowth.GrowingState.Dormant) {
 			babyGrowth.PlantSeed();
+			player.DropResource();
 		}
 		else if(player.HoldingState == PlayerHoldingState.Water && babyGrowth.IsGrowing()) {
 			babyGrowth.FillWater();
+			player.DropResource();
 		}
     }
 }

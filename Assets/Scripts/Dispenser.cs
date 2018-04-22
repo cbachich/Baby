@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceType {
+	Seed,
+	Water
+} 
+
 public class Dispenser : MonoBehaviour {
 
 	[SerializeField]
@@ -16,14 +21,23 @@ public class Dispenser : MonoBehaviour {
 	[SerializeField]
     private Sprite filledSprite;
 
+	[SerializeField]
+    private ResourceType resourceType;
+
 	private float timeUntilDispense;
 	private SpriteRenderer spriteRenderer;
 
 	public bool ResourceAvailable { get { return isReady; } }
+	
+	public ResourceType ResourceType {
+		get { return resourceType; }
+	}
+
+	void Awake() {
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+	}
 
 	void Start () {
-		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
 		if (isReady) {
 			Dispense();
 		 }

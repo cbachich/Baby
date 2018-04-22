@@ -113,6 +113,7 @@ MonoBehaviour:
   isReady: 1
   emptySprite: {fileID: 21300000, guid: 6e22ad248dd17419fabc97d547ccf838, type: 3}
   filledSprite: {fileID: 21300000, guid: 93bacc450fa8b464baca2f97887a1bb4, type: 3}
+  resourceType: 0
 --- !u!114 &114917149920995116
 MonoBehaviour:
   m_ObjectHideFlags: 1
