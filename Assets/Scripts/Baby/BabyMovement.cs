@@ -113,4 +113,8 @@ public class BabyMovement : MonoBehaviour {
 		sittingFor += Time.deltaTime;
 		return sittingFor > sitTime;
 	}
+
+	public void HandleBeingEaten() {
+		GameObject.Destroy(gameObject);
+	}
 }

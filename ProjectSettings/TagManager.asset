@@ -47,6 +47,9 @@ TagManager:
   - name: NPC
     uniqueID: 638965647
     locked: 0
+  - name: Dingo
+    uniqueID: 8417323
+    locked: 0
   - name: Player
     uniqueID: 3097270271
     locked: 0

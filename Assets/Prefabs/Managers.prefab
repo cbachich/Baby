@@ -67,3 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGameTime: 225
+  dingoPrefab: {fileID: 114943295241669778, guid: ca3528f6588ac7c46ba578c504eb6e91,
+    type: 2}
+  dingoSpawnTime: 20
+  dingoSpawnPoint: {x: 9, y: 0}
