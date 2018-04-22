@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1015242009719752
 GameObject:
   m_ObjectHideFlags: 1
@@ -530,6 +530,7 @@ GameObject:
   - component: {fileID: 4809772679879172}
   - component: {fileID: 114233280941492368}
   - component: {fileID: 95621043857969996}
+  - component: {fileID: 114943295241669778}
   m_Layer: 0
   m_Name: Dingo
   m_TagString: Untagged
@@ -2615,6 +2616,18 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4134828101250520}
   m_AttachedIK: {fileID: 0}
+--- !u!114 &114943295241669778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562406570327132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c1813f8f9760f409b9aecf3272eca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creepSpeed: 1
 --- !u!114 &114956785923806974
 MonoBehaviour:
   m_ObjectHideFlags: 1
