@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour {
 	private float dingoSpawnTime = 20f;
 
 	[SerializeField]
-	private Vector2 dingoSpawnPoint = new Vector2(6f, 0f);
+	private Vector2 dingoSpawnPoint = new Vector2(9f, 0f);
 
 	private BabyGrowth[] babyGrowthTiles;
 	private float timeSinceDingoSpawn = 1000f;
+	private bool dingoReady = true;
+	private Dingo dingo;
 
 	public int Score { get; private set; }
 	public float TimeRemaining { get; private set; }
@@ -45,8 +47,10 @@ public class GameManager : MonoBehaviour {
 			IsGameOver = true;
 		}
 
-		if(timeSinceDingoSpawn >= dingoSpawnTime && !IsGameOver) {
-			SpawnDingo();
+		if(timeSinceDingoSpawn >= dingoSpawnTime && !IsGameOver && dingoReady) {
+			dingo.gameObject.SetActive(true);
+			dingo.Reset();
+			dingoReady = false;
 		}
 	}
 
@@ -55,12 +59,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void BeginLevel() {
+		if(dingo == null) {
+			dingo = GameObject.Instantiate(dingoPrefab, dingoSpawnPoint, Quaternion.identity);
+			dingo.ReturnedFromHunt += OnDingoReturnedFromHunt;
+		}
 		TimeRemaining = startingGameTime;
-	}
-
-	private void SpawnDingo() {
-		var dingo = GameObject.Instantiate(dingoPrefab, dingoSpawnPoint, Quaternion.identity);
-		dingo.BabyCaptured += OnDingoCapturedBaby;
 	}
 
 	#region Event Handlers
@@ -68,8 +71,11 @@ public class GameManager : MonoBehaviour {
 		Score++;
 	}
 
-	private void OnDingoCapturedBaby(object sender, EventArgs args) {
-		Debug.Log("dingo ate my baby!");
+	private void OnDingoReturnedFromHunt(object sender, DingoReturnedFromHuntEventArgs args) {
+		Debug.Log("dingo " + (args.WithBaby ? "ate" : "didn't eat") + " my baby!");
+		dingo.gameObject.SetActive(false);
+		dingoReady = true;
+		timeSinceDingoSpawn = 0;
 	}
 	#endregion
 }
