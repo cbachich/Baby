@@ -24,6 +24,8 @@ public class BabyGrowth : MonoBehaviour {
 
 	public event EventHandler BabyGrowthCompleted;
 	public event EventHandler BabyGrowthDied;
+
+	public GameObject baby;
 	
 	private GrowingState state = GrowingState.Dormant;
 
@@ -66,8 +68,7 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void PopoutABaby() {
-		// TODO - Create a baby object
-		if(BabyGrowthCompleted != null) { BabyGrowthCompleted(this, EventArgs.Empty); }
+		Instantiate(baby, transform.position, transform.rotation);
 
 		ChangeState(GrowingState.Dormant);
 		Reset();
@@ -80,11 +81,18 @@ public class BabyGrowth : MonoBehaviour {
 	private void UpdateTimeDeltas()
 	{
 		waterLevel -= Time.deltaTime;
-		growthLevel += Time.deltaTime;
+
+		if (IsHealthy()) {
+			growthLevel += Time.deltaTime;
+		}
+	}
+
+	bool IsHealthy() {
+		return waterLevel > (WaterMax * 0.6);
 	}
 
 	private void UpdateState() {
-		if (waterLevel > (WaterMax * 0.6)) {
+		if (IsHealthy()) {
 			ChangeState(GrowingState.GrowingHealthy);
 		}
 		else if (waterLevel > (WaterMax * 0.25)) {
@@ -107,7 +115,7 @@ public class BabyGrowth : MonoBehaviour {
 		switch (state)
 		{
 			case GrowingState.Dormant:
-				//GetComponent<SpriteRenderer>().color = Color.magenta;
+				GetComponent<SpriteRenderer>().color = Color.yellow;
 				break;
 			case GrowingState.GrowingHealthy:
 				GetComponent<SpriteRenderer>().color = Color.green;
