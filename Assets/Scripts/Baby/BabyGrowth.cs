@@ -68,6 +68,10 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void PopoutABaby() {
+		if (BabyGrowthCompleted != null) {
+			BabyGrowthCompleted(this, EventArgs.Empty);
+		}
+
 		Instantiate(baby, transform.position, transform.rotation);
 
 		ChangeState(GrowingState.Dormant);

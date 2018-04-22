@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,17 @@ public class StorkMovement : MonoBehaviour {
     private FlightDirection direction = FlightDirection.Up;
 
 	[SerializeField]
-	private Rigidbody m_Rigidbody;
+	private Rigidbody2D m_Rigidbody;
+
+	[SerializeField]
+	private StorkInteract storkInteract;
+
+	public event EventHandler StorkCollected;
+
+	float maxX = 9.0f;
+	float minX = -9.0f;
+	float maxY = 6.0f;
+	float minY = -6.0f;
 
 	public FlightDirection FlightDirection { 
 		get { return direction; } 
@@ -28,13 +39,21 @@ public class StorkMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		m_Rigidbody = GetComponent<Rigidbody>();
+		m_Rigidbody = GetComponent<Rigidbody2D>();
 		SetDirection();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Fly();
+
+		if (IsOutsideOfView()) {
+			if (StorkCollected != null) {
+				StorkCollected(this, EventArgs.Empty);
+			}
+
+			Destroy(gameObject);
+		}
 	}
 
 	private void Fly() {
@@ -43,13 +62,22 @@ public class StorkMovement : MonoBehaviour {
 
 	private void SetDirection() {
 		if (direction == FlightDirection.Down) {
-			transform.Rotate (Vector3.forward * 180);
+			m_Rigidbody.MoveRotation(180);
 		}
 		else if (direction == FlightDirection.Right) {
-			transform.Rotate (Vector3.forward * -90);
+			m_Rigidbody.MoveRotation(-90);
 		}
 		else if (direction == FlightDirection.Left) {
-			transform.Rotate (Vector3.forward * 90);
+			m_Rigidbody.MoveRotation(90);
 		}
+	}
+
+	private bool IsOutsideOfView()
+	{
+		return 
+			transform.position.x > maxX 
+			|| transform.position.x < minX 
+			|| transform.position.y > maxY 
+			|| transform.position.y < minY;
 	}
 }

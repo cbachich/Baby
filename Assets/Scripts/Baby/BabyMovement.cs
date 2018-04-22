@@ -27,8 +27,8 @@ public class BabyMovement : MonoBehaviour {
 
 	float maxX = 5.75f;
 	float minX = -5.75f;
-	float maxY = 4.15f;
-	float minY = -4.15f;
+	float maxY = 3.82f;
+	float minY = -3.82f;
 
 	float xDirection;
 	float yDirection;
