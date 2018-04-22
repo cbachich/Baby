@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	[SerializeField]
@@ -35,6 +36,10 @@ public class GameManager : MonoBehaviour {
 
 	private void OnBabyGrowthCompleted(object sender, EventArgs args) {
 		Score++;
+	}
+
+	public void RestartLevel() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void BeginLevel() {
