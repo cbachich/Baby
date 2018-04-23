@@ -17,9 +17,13 @@ public class FarmTileInteractable : PlayerInteractable
 			babyGrowth.PlantSeed();
 			player.DropResource();
 		}
-		else if(player.HoldingState == PlayerHoldingState.Water && babyGrowth.IsGrowing()) {
+		else if(player.HoldingState == PlayerHoldingState.Water && player.WaterCharges > 0 && babyGrowth.IsGrowing()) {
 			babyGrowth.FillWater();
-			player.DropResource();
+			player.WaterCharges--;
+
+			if(player.WaterCharges == 0) {
+				player.DropResource();
+			}
 		}
     }
 }
