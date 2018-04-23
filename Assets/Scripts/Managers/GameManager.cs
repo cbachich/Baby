@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private Vector2 dingoSpawnPoint = new Vector2(9f, 0f);
 
+	[SerializeField]
+	private int maxAllowedBabyDeaths = 3;
+
 	private BabyGrowth[] babyGrowthTiles;
 	private StorkMovement[] storkMovements;
 	private float timeSinceDingoSpawn = 1000f;
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	public int Score { get; private set; }
 	public float TimeRemaining { get; private set; }
 	public bool IsGameOver { get; private set; }
+	public int BabyDeathCount { get; private set; }
 
 	private void Awake() {
 		babyGrowthTiles = FindObjectsOfType<BabyGrowth>();
@@ -103,6 +107,14 @@ public class GameManager : MonoBehaviour {
 		dingo.gameObject.SetActive(false);
 		dingoReady = true;
 		timeSinceDingoSpawn = 0;
+
+		if(args.WithBaby) {
+			BabyDeathCount++;
+
+			if(BabyDeathCount >= maxAllowedBabyDeaths) {
+				IsGameOver = true;
+			}
+		}
 	}
 	#endregion
 }
