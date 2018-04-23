@@ -20,8 +20,12 @@ public class PlayerInteract : MonoBehaviour {
 
 	[SerializeField]
 	private WateringCan wateringCan;
+
 	[SerializeField]
 	private SpriteRenderer seed;
+
+	[SerializeField]
+	private SpriteRenderer hangingBaby;
 
 	private IPlayerInteractable currentInteractable;
 	private Dictionary<GameObject, IPlayerInteractable> gameObjectInteractableLookup = new Dictionary<GameObject, IPlayerInteractable>();
@@ -59,7 +63,9 @@ public class PlayerInteract : MonoBehaviour {
 
 		if (heldBaby != null)
 		{
-			heldBaby.transform.position = transform.position;
+			var position = transform.position;
+			position.x -= 1.0f;
+			heldBaby.transform.position = position;
 			heldBaby.WasDropped();
 			heldBaby = null;
 		}
@@ -91,6 +97,7 @@ public class PlayerInteract : MonoBehaviour {
 
 		wateringCan.ShowCan(holdingState == PlayerHoldingState.Water && WaterCharges > 0);
 		seed.enabled = (holdingState == PlayerHoldingState.Seed);
+		hangingBaby.enabled = (holdingState == PlayerHoldingState.Baby);
 	}
 
 	private void SignalLeavingInteractable(IPlayerInteractable oldInteractable) {
