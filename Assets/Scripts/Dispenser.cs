@@ -16,25 +16,14 @@ public class Dispenser : MonoBehaviour {
     private bool isReady = true;
 
 	[SerializeField]
-    private Sprite emptySprite;
-
-	[SerializeField]
-    private Sprite filledSprite;
-
-	[SerializeField]
     private ResourceType resourceType;
 
 	private float timeUntilDispense;
-	private SpriteRenderer spriteRenderer;
 
 	public bool ResourceAvailable { get { return isReady; } }
 	
 	public ResourceType ResourceType {
 		get { return resourceType; }
-	}
-
-	void Awake() {
-		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	void Start () {
@@ -70,13 +59,11 @@ public class Dispenser : MonoBehaviour {
 	{
 		isReady = false;
 		timeUntilDispense = dispenseRate;
-		spriteRenderer.sprite = emptySprite;
 	}
 
 	private void Dispense()
 	{
 		isReady = true;
 
-		spriteRenderer.sprite = filledSprite;
 	}
 }
