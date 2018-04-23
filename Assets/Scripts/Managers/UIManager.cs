@@ -1,12 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager: MonoBehaviour {
     [SerializeField]
-    private Text score;
+    private TextMeshProUGUI score;
 
     [SerializeField]
-    private Text timeRemaining;
+    private TextMeshProUGUI timeRemaining;
 
     [SerializeField]
     private GameObject gameOverPanel;
@@ -28,8 +29,8 @@ public class UIManager: MonoBehaviour {
     }
 
     private void Update() {
-        score.text = "Score - " + gameManager.Score;
-        timeRemaining.text = "Time - " + FormatTimeText((int)gameManager.TimeRemaining);
+        score.text = gameManager.Score.ToString();
+        timeRemaining.text = FormatTimeText((int)gameManager.TimeRemaining);
 
         gameOverPanel.SetActive(gameManager.IsGameOver);
 
