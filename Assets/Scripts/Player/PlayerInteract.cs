@@ -18,11 +18,15 @@ public class PlayerInteract : MonoBehaviour {
 	[SerializeField]
 	private int maxWaterCharges = 5;
 
+	[SerializeField]
+	private WateringCan wateringCan;
+	[SerializeField]
+	private SpriteRenderer seed;
+
 	private IPlayerInteractable currentInteractable;
 	private Dictionary<GameObject, IPlayerInteractable> gameObjectInteractableLookup = new Dictionary<GameObject, IPlayerInteractable>();
 	private PlayerHoldingState holdingState;
 	private BabyMovement heldBaby;
-	private WateringCan wateringCan;
 
 	public PlayerHoldingState HoldingState {
 		get { return holdingState; }
@@ -61,10 +65,6 @@ public class PlayerInteract : MonoBehaviour {
 		}
 	}
 
-	private void Awake() {
-		wateringCan = GetComponentInChildren<WateringCan>();
-	}
-
 	private void Update() {
 		var interactableCollider = Physics2D.OverlapPoint(transform.position, interactableLayerMask);
 		if(interactableCollider != null) {
@@ -90,6 +90,7 @@ public class PlayerInteract : MonoBehaviour {
 		}
 
 		wateringCan.ShowCan(holdingState == PlayerHoldingState.Water && WaterCharges > 0);
+		seed.enabled = (holdingState == PlayerHoldingState.Seed);
 	}
 
 	private void SignalLeavingInteractable(IPlayerInteractable oldInteractable) {

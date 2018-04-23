@@ -1133,6 +1133,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114706700304853708, guid: 3da45ae4e8684bb47b8f0c5505b3e4d6,
+        type: 2}
+      propertyPath: maxWaterCharges
+      value: 10000000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3da45ae4e8684bb47b8f0c5505b3e4d6, type: 2}
   m_IsPrefabParent: 0
