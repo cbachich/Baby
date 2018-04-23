@@ -83,6 +83,12 @@ public class BabyMovement : MonoBehaviour {
 
 		Vector3 direction = new Vector3(xDirection, yDirection, 0f);
 
+		if((xDirection < 0 && transform.localScale.x > 0) || (xDirection > 0 && transform.localScale.x < 0)) {
+			var scale = transform.localScale;
+			scale.x *= -1f;
+			transform.localScale = scale;
+		}
+
 		transform.Translate(direction * Time.deltaTime);
 	}
 

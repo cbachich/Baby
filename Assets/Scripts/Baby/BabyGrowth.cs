@@ -13,6 +13,15 @@ public class BabyGrowth : MonoBehaviour {
 	[SerializeField]
     private float WaterMax = 10.0f;
 
+	[SerializeField]
+	private BabyPlant babyPlant;
+
+	[SerializeField]
+	private Animator plantDialog;
+
+	[SerializeField]
+	private Color[] skinColors;
+
 	/* During Life */
 
     private float waterLevel = 0.0f;
@@ -34,11 +43,13 @@ public class BabyGrowth : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ChangeState(GrowingState.Dormant);
+		babyPlant.PopOutAnimationCompleted += BabyPlantPopOutCompleted;
 		Reset();
+		babyPlant.Show(false);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		if (!growing) {
 			return;
 		}
@@ -49,6 +60,17 @@ public class BabyGrowth : MonoBehaviour {
 			PopoutABaby();
 			return;
 		}
+		else if(growthLevel >= (GrowthGoal * 0.66f)) {
+			babyPlant.Animator.SetInteger("Stage", 3);
+		}
+		else if(growthLevel >= (GrowthGoal * 0.33f)) {
+			babyPlant.Animator.SetInteger("Stage", 2);
+		}
+		else {
+			babyPlant.Animator.SetInteger("Stage", 1);
+		}
+
+		plantDialog.SetFloat("WaterLevel", waterLevel / WaterMax);
 
 		UpdateState();
 	}
@@ -61,6 +83,8 @@ public class BabyGrowth : MonoBehaviour {
 		growing = true;
 		waterLevel = WaterMax;
 		ChangeState(GrowingState.GrowingHealthy);
+		babyPlant.Show(true);
+		babyPlant.SetColor(skinColors[UnityEngine.Random.Range(0, skinColors.Length)]);
 	}
 
 	public void FillWater() {
@@ -68,14 +92,7 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void PopoutABaby() {
-		if (BabyGrowthCompleted != null) {
-			BabyGrowthCompleted(this, EventArgs.Empty);
-		}
-
-		Instantiate(baby, transform.position, transform.rotation);
-
-		ChangeState(GrowingState.Dormant);
-		Reset();
+		babyPlant.Animator.SetInteger("Stage", 4);
 	}
 
 	public bool IsGrowing() {
@@ -115,25 +132,6 @@ public class BabyGrowth : MonoBehaviour {
 		if(this.state == state) { return; }
 
 		this.state = state;
-
-		switch (state)
-		{
-			case GrowingState.Dormant:
-				GetComponent<SpriteRenderer>().color = Color.yellow;
-				break;
-			case GrowingState.GrowingHealthy:
-				GetComponent<SpriteRenderer>().color = Color.green;
-				break;
-			case GrowingState.GrowingWilting:
-				GetComponent<SpriteRenderer>().color = Color.grey;
-				break;
-			case GrowingState.GrowingDying:
-				GetComponent<SpriteRenderer>().color = Color.red;
-				break;
-			case GrowingState.Dead:
-				GetComponent<SpriteRenderer>().color = Color.black;
-				break;
-		}
 	}
 
 	private void Kill() {
@@ -143,8 +141,22 @@ public class BabyGrowth : MonoBehaviour {
 	}
 
 	private void Reset() {
-		waterLevel = 0.0f;
+		waterLevel = WaterMax;
 		growthLevel = 0.0f;
 		growing = false;
 	}
+
+    private void BabyPlantPopOutCompleted(object sender, EventArgs e)
+    {
+		if (BabyGrowthCompleted != null) {
+			BabyGrowthCompleted(this, EventArgs.Empty);
+		}
+
+		Instantiate(baby, transform.position, transform.rotation);
+
+		ChangeState(GrowingState.Dormant);
+		Reset();
+
+		babyPlant.Show(false);
+    }
 }

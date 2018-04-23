@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 2370309337
     locked: 0
+  - name: BabyPlant
+    uniqueID: 1767418483
+    locked: 0
   - name: NPC
     uniqueID: 638965647
     locked: 0
