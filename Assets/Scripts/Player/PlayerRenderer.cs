@@ -8,12 +8,6 @@ public class PlayerRenderer : MonoBehaviour {
     private Sprite atRest;
 
 	[SerializeField]
-    private Sprite holdingSeed;
-
-	[SerializeField]
-    private Sprite holdingWater;
-
-	[SerializeField]
 	private PlayerInteract playerInteract;
 
 	private SpriteRenderer spriteRenderer;
@@ -25,13 +19,10 @@ public class PlayerRenderer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (playerInteract.HoldingState == PlayerHoldingState.Seed) {
-			spriteRenderer.sprite = holdingSeed;
 		}
 		else if (playerInteract.HoldingState == PlayerHoldingState.Water) {
-			spriteRenderer.sprite = holdingWater;
 		}
 		else {
-			spriteRenderer.sprite = atRest;
 		}
 	}
 }

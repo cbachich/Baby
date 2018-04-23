@@ -15,15 +15,20 @@ public class PlayerInteract : MonoBehaviour {
 	[SerializeField]
 	private LayerMask interactableLayerMask;
 
+	[SerializeField]
+	private int maxWaterCharges = 5;
+
 	private IPlayerInteractable currentInteractable;
 	private Dictionary<GameObject, IPlayerInteractable> gameObjectInteractableLookup = new Dictionary<GameObject, IPlayerInteractable>();
 	private PlayerHoldingState holdingState;
-
 	private BabyMovement heldBaby;
+	private WateringCan wateringCan;
 
 	public PlayerHoldingState HoldingState {
 		get { return holdingState; }
 	}
+
+	public int WaterCharges { get; set; }
 
 	public void PickupResource(ResourceType resourceType) {
 		if (resourceType == ResourceType.Seed) {
@@ -31,6 +36,7 @@ public class PlayerInteract : MonoBehaviour {
 		}
 		else if (resourceType == ResourceType.Water) {
 			holdingState = PlayerHoldingState.Water;
+			WaterCharges = maxWaterCharges;
 		}
 	}
 
@@ -41,6 +47,7 @@ public class PlayerInteract : MonoBehaviour {
 	public void PickupBaby(BabyMovement babyMovement) {
 		babyMovement.WasPickedUp();
 		heldBaby = babyMovement;
+		holdingState = PlayerHoldingState.Baby;
 	}
 
 	public void DropResource() {
@@ -52,6 +59,10 @@ public class PlayerInteract : MonoBehaviour {
 			heldBaby.WasDropped();
 			heldBaby = null;
 		}
+	}
+
+	private void Awake() {
+		wateringCan = GetComponentInChildren<WateringCan>();
 	}
 
 	private void Update() {
@@ -77,6 +88,8 @@ public class PlayerInteract : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Q)) {
 			DropResource();
 		}
+
+		wateringCan.ShowCan(holdingState == PlayerHoldingState.Water && WaterCharges > 0);
 	}
 
 	private void SignalLeavingInteractable(IPlayerInteractable oldInteractable) {
