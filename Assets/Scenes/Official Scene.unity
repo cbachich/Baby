@@ -445,6 +445,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 819845573}
   - {fileID: 745207536}
   - {fileID: 1576840018}
   - {fileID: 1474667069}
@@ -703,7 +704,7 @@ Transform:
   - {fileID: 1292393268}
   - {fileID: 852883451}
   m_Father: {fileID: 503471448}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &781769402 stripped
 Transform:
@@ -731,7 +732,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 819845572}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.6700058, y: -0.48079318, z: -0.25449178}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -740,8 +741,8 @@ Transform:
   - {fileID: 1981403531}
   - {fileID: 617605552}
   - {fileID: 71632301}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 503471448}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &852883451 stripped
 Transform:
@@ -1181,7 +1182,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4154347528212978, guid: 45684de8adeee4b1daa9b88960bb2263, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45684de8adeee4b1daa9b88960bb2263, type: 2}
@@ -1867,7 +1868,7 @@ Tilemap:
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
-    m_DirtyIndex: 1
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
@@ -1926,7 +1927,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4786290869963294, guid: 4295e278da50e4c5d96202e534ced62e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4295e278da50e4c5d96202e534ced62e, type: 2}

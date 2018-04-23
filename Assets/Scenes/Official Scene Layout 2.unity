@@ -344,12 +344,12 @@ Prefab:
         type: 2}
       propertyPath: timeRemaining
       value: 
-      objectReference: {fileID: 2017892981}
+      objectReference: {fileID: 0}
     - target: {fileID: 114662213845221146, guid: 9e7bdfdb95c2ab54681d40779892df41,
         type: 2}
       propertyPath: score
       value: 
-      objectReference: {fileID: 1686988976}
+      objectReference: {fileID: 0}
     - target: {fileID: 114802473832777426, guid: 9e7bdfdb95c2ab54681d40779892df41,
         type: 2}
       propertyPath: startingGameTime
@@ -1197,12 +1197,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3da45ae4e8684bb47b8f0c5505b3e4d6, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1686988976 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114810471725953938, guid: 60ade30b141938d4f9cd6ef0d0cd153f,
-    type: 2}
-  m_PrefabInternal: {fileID: 636879472}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1745827967
 Prefab:
   m_ObjectHideFlags: 0
@@ -2102,12 +2096,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 444f804f651d544dc807f7ea4bda4e5f, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &2017892981 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114988906759094824, guid: 60ade30b141938d4f9cd6ef0d0cd153f,
-    type: 2}
-  m_PrefabInternal: {fileID: 636879472}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &2096584222
 GameObject:
   m_ObjectHideFlags: 0
