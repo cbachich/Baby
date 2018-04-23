@@ -19,6 +19,8 @@ public class Dingo : MonoBehaviour {
 	private float creepSpeed = 1f;
 	[SerializeField]
 	private float runSpeed = 1.3f;
+	[SerializeField]
+	private SpriteRenderer hangingBabySprite;
 
 	private Vector3 startingPoint;
 	private DingoBehaviorState currentBehavior = DingoBehaviorState.TrackingBaby;
@@ -31,7 +33,6 @@ public class Dingo : MonoBehaviour {
 	}
 
 	private void Update() {
-
 		switch(currentBehavior) {
 			case DingoBehaviorState.TrackingBaby:
 			TrackBaby();
@@ -46,6 +47,8 @@ public class Dingo : MonoBehaviour {
 			RunAway();
 			break;
 		}
+
+		hangingBabySprite.enabled = currentBehavior == DingoBehaviorState.LeavingWithBaby;
 	}
 
 	private void TrackBaby() {

@@ -1004,6 +1004,16 @@ Prefab:
       propertyPath: m_Name
       value: FarmTile1
       objectReference: {fileID: 0}
+    - target: {fileID: 61614274880240656, guid: 50f08c8842c338d4a9a4a48fd2aa14ae,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 61614274880240656, guid: 50f08c8842c338d4a9a4a48fd2aa14ae,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50f08c8842c338d4a9a4a48fd2aa14ae, type: 2}
   m_IsPrefabParent: 0
