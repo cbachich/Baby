@@ -42,10 +42,8 @@ public class BabyGrowth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ChangeState(GrowingState.Dormant);
 		babyPlant.PopOutAnimationCompleted += BabyPlantPopOutCompleted;
 		Reset();
-		babyPlant.Show(false);
 	}
 
     // Update is called once per frame
@@ -136,14 +134,17 @@ public class BabyGrowth : MonoBehaviour {
 
 	private void Kill() {
 		if(BabyGrowthDied != null) { BabyGrowthDied(this, EventArgs.Empty); }
-		ChangeState(GrowingState.Dead);
 		Reset();
 	}
 
 	private void Reset() {
+		ChangeState(GrowingState.Dormant);
 		waterLevel = WaterMax;
 		growthLevel = 0.0f;
 		growing = false;
+		babyPlant.Show(false);
+		babyPlant.Animator.SetInteger("Stage", 1);
+		plantDialog.SetFloat("WaterLevel", 1);
 	}
 
     private void BabyPlantPopOutCompleted(object sender, EventArgs e)
@@ -154,9 +155,6 @@ public class BabyGrowth : MonoBehaviour {
 
 		Instantiate(baby, transform.position, transform.rotation);
 
-		ChangeState(GrowingState.Dormant);
 		Reset();
-
-		babyPlant.Show(false);
     }
 }
