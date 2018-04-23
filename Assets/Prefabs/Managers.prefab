@@ -55,6 +55,14 @@ MonoBehaviour:
   score: {fileID: 0}
   timeRemaining: {fileID: 0}
   gameOverPanel: {fileID: 0}
+  babyDeathIndicators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  babyFaceSilohouette: {fileID: 21300000, guid: 4a95283a63514434d9d2c2edfb163810,
+    type: 3}
+  babyFaceDeath: {fileID: 21300000, guid: ed12ba04910e933429a167a0c6b3f0b0, type: 3}
+  babyFaceSilohouetteColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114802473832777426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,8 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9e0be7f1fec6e47b5a3fd32930713f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingGameTime: 225
+  startingGameTime: 180
   dingoPrefab: {fileID: 114943295241669778, guid: ca3528f6588ac7c46ba578c504eb6e91,
     type: 2}
   dingoSpawnTime: 20
   dingoSpawnPoint: {x: 9, y: 0}
+  maxAllowedBabyDeaths: 3
