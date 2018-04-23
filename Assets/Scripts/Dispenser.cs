@@ -19,11 +19,16 @@ public class Dispenser : MonoBehaviour {
     private ResourceType resourceType;
 
 	private float timeUntilDispense;
+	private Animator animator;
 
 	public bool ResourceAvailable { get { return isReady; } }
 	
 	public ResourceType ResourceType {
 		get { return resourceType; }
+	}
+
+	private void Awake() {
+		animator = GetComponent<Animator>();
 	}
 
 	void Start () {
@@ -59,11 +64,13 @@ public class Dispenser : MonoBehaviour {
 	{
 		isReady = false;
 		timeUntilDispense = dispenseRate;
+		animator.SetBool("IsOpen", false);
 	}
 
 	private void Dispense()
 	{
 		isReady = true;
 
+		animator.SetBool("IsOpen", true);
 	}
 }
