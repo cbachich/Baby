@@ -10,10 +10,25 @@ public enum FlightDirection {
 	Left
 }
 
+ public class StorkCollectedEventArgs : System.EventArgs
+ {
+     public StorkCollectedEventArgs(int numberOfCollectedBabies)
+     {
+         this.NumberOfCollectedBabies = numberOfCollectedBabies;
+     }
+     public int NumberOfCollectedBabies{get;private set;}
+ }
+
 public class StorkMovement : MonoBehaviour {
 
 	[SerializeField]
     private float speed = 1.0f;
+
+	[SerializeField]
+    private float waitFor = 20.0f;
+
+	[SerializeField]
+    private float showTimeBeforeFlight = 5.0f;
 
 	[SerializeField]
     private FlightDirection direction = FlightDirection.Up;
@@ -37,23 +52,50 @@ public class StorkMovement : MonoBehaviour {
 
 	Vector3 flyingDirection;
 
+	bool reportedBabies = false;
+	float hasWaitedFor = 0.0f;
+
+	public Renderer rend;
+
 	// Use this for initialization
 	void Awake () {
+		rend = GetComponent<Renderer>();
+        rend.enabled = false;
+
 		m_Rigidbody = GetComponent<Rigidbody2D>();
 		SetDirection();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Fly();
+		hasWaitedFor += Time.deltaTime;
 
-		if (IsOutsideOfView()) {
-			if (StorkCollected != null) {
-				StorkCollected(this, EventArgs.Empty);
+		if (!DoneWaiting()) {
+			if (TimeToShow()) {
+				rend.enabled = true;
 			}
 
+			return;
+		}
+
+		Fly();
+
+		if (IsOutsideOfView() && !reportedBabies) {
+			if (StorkCollected != null) {
+				StorkCollectedEventArgs eventArgs = new StorkCollectedEventArgs(storkInteract.NumberOfBabiesCollected);
+				StorkCollected(this, eventArgs);
+			}
+			reportedBabies = true;
 			Destroy(gameObject);
 		}
+	}
+
+	private bool DoneWaiting() {
+		return hasWaitedFor > waitFor;
+	}
+
+	private bool TimeToShow() {
+		return hasWaitedFor > (waitFor - showTimeBeforeFlight);
 	}
 
 	private void Fly() {

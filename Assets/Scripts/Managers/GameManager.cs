@@ -62,25 +62,20 @@ public class GameManager : MonoBehaviour {
 
 	private void OnStorkCollected(object sender, EventArgs args)
 	{
-		// TODO - How do I get this to read the Number of babies collected?
-		/*
-		GameObject senderGameObject = (GameObject) sender;
-		StorkInteract storkInteract = senderGameObject.GetComponent<StorkInteract>();
-		int numberOfBabiesCollected = storkInteract.NumberOfBabiesCollected;
-		*/
+		StorkCollectedEventArgs storkCollectedEventArgs = (StorkCollectedEventArgs) args;
 
-		int numberOfBabiesCollected = 1;
+		int numberOfBabiesCollected = storkCollectedEventArgs.NumberOfCollectedBabies;
 
 		int multiplier = 1;
 
-		if (numberOfBabiesCollected > 2) {
-			multiplier = 2;
+		if (numberOfBabiesCollected > 8) {
+			multiplier = 4;
 		}
 		else if (numberOfBabiesCollected > 5) {
 			multiplier = 3;
 		}
-		else if (numberOfBabiesCollected > 10) {
-			multiplier = 4;
+		else if (numberOfBabiesCollected > 2) {
+			multiplier = 2;
 		}
 
 		Score += (50 * numberOfBabiesCollected) * multiplier;
