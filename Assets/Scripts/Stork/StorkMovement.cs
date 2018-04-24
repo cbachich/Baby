@@ -57,6 +57,8 @@ public class StorkMovement : MonoBehaviour {
 
 	public Renderer rend;
 
+	private bool audioPlayed = false;
+
 	// Use this for initialization
 	void Awake () {
 		rend = GetComponent<Renderer>();
@@ -73,6 +75,11 @@ public class StorkMovement : MonoBehaviour {
 		if (!DoneWaiting()) {
 			if (TimeToShow()) {
 				rend.enabled = true;
+
+				if (!audioPlayed) {
+					gameObject.GetComponent<AudioSource> ().Play ();
+					audioPlayed = true;
+				}
 			}
 
 			return;
