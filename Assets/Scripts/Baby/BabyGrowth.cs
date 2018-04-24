@@ -143,7 +143,7 @@ public class BabyGrowth : MonoBehaviour {
 		growthLevel = 0.0f;
 		growing = false;
 		babyPlant.Show(false);
-		babyPlant.Animator.SetInteger("Stage", 1);
+		babyPlant.Animator.SetTrigger("Restart");
 		plantDialog.SetFloat("WaterLevel", 1);
 	}
 
