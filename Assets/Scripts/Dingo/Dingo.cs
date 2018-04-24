@@ -21,6 +21,8 @@ public class Dingo : MonoBehaviour {
 	private float runSpeed = 1.3f;
 	[SerializeField]
 	private SpriteRenderer hangingBabySprite;
+	[SerializeField]
+	AudioSource babyCryingAudio;
 
 	private Vector3 startingPoint;
 	private DingoBehaviorState currentBehavior = DingoBehaviorState.TrackingBaby;
@@ -133,6 +135,7 @@ public class Dingo : MonoBehaviour {
 	
 	private void PickupBaby(BabyMovement babyMovement) {
 		babyMovement.WasPickedUp();
+        gameObject.GetComponent<AudioSource> ().Play ();
 		heldBaby = babyMovement;
 		currentBehavior = DingoBehaviorState.LeavingWithBaby;
 	}
